@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('kode_booking');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->text('alamat');
             $table->date('tanggal_mulai');
             $table->date('tanggal_selesai');
             $table->decimal('total_harga', 12, 2)->default(0);

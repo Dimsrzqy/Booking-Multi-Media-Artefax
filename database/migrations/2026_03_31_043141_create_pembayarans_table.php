@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pembayarans', function (Blueprint $table) {
+        Schema::create('pembayaran', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('booking_id')->constrained('booking')->cascadeOnDelete();
+            $table->string('metode_pembayaran');
+            $table->decimal('jumlah_bayar', 12, 2);
+            $table->enum('status',['pending','berhasil','gagal'])->default('pending');
+            $table->timestamp('tanggal_bayar')->nullable();
             $table->timestamps();
         });
     }
@@ -22,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pembayarans');
+        Schema::dropIfExists('pembayaran');
     }
 };
